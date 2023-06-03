@@ -13,11 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link viewcustomerFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class viewcustomerFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
