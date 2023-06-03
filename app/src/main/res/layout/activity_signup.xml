@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signup">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_marginTop="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:text="Sign Up"
+                android:textColor="#ff7aff24"
+                android:textSize="35dp" />
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <EditText
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:id = "@+id/name"
+            android:hint = "Name"
+            android:focusable = "true"
+            android:textColorHighlight = "#ff7eff15"
+            android:textColorHint = "#ffff25e6"
+            android:layout_marginTop = "46dp"
+            />
+        <EditText
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:id = "@+id/SignUpEmail"
+            android:hint = "Email"
+            android:focusable = "true"
+            android:textColorHighlight = "#ff7eff15"
+            android:textColorHint = "#ffff25e6"
+            android:layout_marginTop = "16dp"
+            />
+
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/PasswordSignup"
+            android:textColorHint="#ffff299f"
+            android:layout_marginTop = "16dp"
+            android:hint="Password" />
+        <EditText
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:id = "@+id/ContactNumberSignup"
+            android:hint = "Contact Number"
+            android:focusable = "true"
+            android:textColorHighlight = "#ff7eff15"
+            android:textColorHint = "#ffff25e6"
+            android:layout_marginTop = "16dp"
+            />
+
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_marginTop="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/SignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Signup" />
+
+
+        <Button
+
+            android:id="@+id/gotologinpage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Go to Login Page" />
+    </RelativeLayout>
+</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

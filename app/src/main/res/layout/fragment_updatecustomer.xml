@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".updatecustomerFragment"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="25dp"
+            android:paddingBottom="65dp"
+            >
+            <TextView android:text = "Update Customer"
+                android:layout_width="match_parent"
+                android:layout_height = "wrap_content"
+                android:id = "@+id/cust_heading"
+                android:textSize = "35dp"
+                android:layout_alignParentTop = "true"
+                android:textAlignment="center"
+                android:layout_centerHorizontal = "true" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            >
+            <TextView
+                android:text = "Customer ID"
+                android:layout_width="wrap_content"
+                android:layout_height = "30dp"
+                android:textSize = "20dp"
+                android:layout_alignParentTop = "true"
+                android:textAlignment="center"
+                android:layout_centerHorizontal = "true" />
+
+            <Spinner
+                android:id="@+id/CustomerIdInUpdateFragmment"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:hint="Please enter customer name"
+                android:inputType="text">
+
+            </Spinner>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+
+                <Button
+                    android:id="@+id/SearchCustomerButtonInUpdateCustFragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="15dp"
+                    android:text="Search" />
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            >
+            <TextView
+                android:text = "Customer ID"
+                android:layout_width="wrap_content"
+                android:layout_height = "30dp"
+
+                android:textSize = "20dp"
+                android:layout_alignParentTop = "true"
+                android:textAlignment="center"
+                android:layout_centerHorizontal = "true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:id="@+id/CustomerIdInSearchResult"
+                android:layout_marginLeft="10dp"
+
+                android:inputType="none"
+                android:editable="false"
+                >
+
+            </EditText>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            >
+            <TextView
+                android:text = "Customer Name"
+                android:layout_width="wrap_content"
+                android:layout_height = "30dp"
+                android:id = "@+id/cust_name_label"
+                android:textSize = "20dp"
+                android:layout_alignParentTop = "true"
+                android:textAlignment="center"
+                android:layout_centerHorizontal = "true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:id="@+id/CustomerNameInUpdateFragment"
+                android:layout_marginLeft="10dp"
+                android:hint="Please enter customer name"
+                android:inputType="text"
+                >
+
+            </EditText>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+
+            >
+            <TextView
+                android:text = "Contact Number"
+                android:layout_width="wrap_content"
+                android:layout_height = "30dp"
+                android:id = "@+id/cust_phone_label"
+                android:textSize = "20dp"
+                android:layout_alignParentTop = "true"
+                android:textAlignment="center"
+                android:layout_centerHorizontal = "true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:id="@+id/ContactNumberInUpdateFragment"
+                android:layout_marginLeft="10dp"
+                android:hint="Please enter contact number"
+                android:inputType="number"
+                >
+
+            </EditText>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="130dp"
+
+            >
+            <RelativeLayout
+                android:layout_marginTop="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/AddInvoiceButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginStart="16dp"
+android:padding="5dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Add" />
+
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View"
+                    android:id="@+id/ViewInvoiceButton"
+                    android:layout_margin="16dp"
+                    android:layout_alignParentRight="true"
+                    android:padding="5dp"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
