@@ -45,7 +45,7 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:id="@+id/cust_"
+                android:id="@+id/cust_id_in_invoice"
                 android:layout_marginLeft="10dp"
 
                 android:inputType="text"
@@ -76,7 +76,8 @@
                 android:id="@+id/invoice_date"
                 android:layout_marginLeft="10dp"
                 android:hint="dd/mm/yyyy"
-                android:inputType="datetime"
+                android:inputType="date"
+
                 >
 
             </EditText>
@@ -114,7 +115,7 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/LoginButton"
+                android:id="@+id/ADDINVOICE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"

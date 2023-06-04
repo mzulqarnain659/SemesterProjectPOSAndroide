@@ -15,8 +15,7 @@
         <activity
             android:name=".splashscreen"
             android:exported="true"
-            android:label="@string/title_activity_splashscreen"
-            android:theme="@style/Theme.SemesterProject.NoActionBar" >
+             android:theme="@style/Theme.SemesterProject.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

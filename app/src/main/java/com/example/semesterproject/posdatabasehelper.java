@@ -19,8 +19,6 @@ public class posdatabasehelper extends SQLiteOpenHelper {
                 "    cust_name  TEXT," +
                 "    cust_phone TEXT" +
                 ");");
-        db.execSQL("CREATE TABLE IF NOT EXISTS inventory_item ( product_id       INTEGER PRIMARY KEY, sup_id           INTEGER, date_of_addition TEXT, prod_name        TEXT, prod_make        TEXT,prod_quantity    INTEGER,   prod_cost_price  INTEGER, prod_sale_price  INTEGER,);\n");
-
         // Create tables or perform any other initialization tasks here
     }
 
