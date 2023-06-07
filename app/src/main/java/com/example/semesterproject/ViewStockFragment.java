@@ -47,6 +47,7 @@ SQLiteDatabase db;
         db = dbhelper.getReadableDatabase();
         fetchSupplierData();
         return view;
+
     }
     private void fetchSupplierData() {
         Cursor cursor = db.rawQuery("SELECT supplier_id, supplier_name, supplier_contact FROM supplier", null);
