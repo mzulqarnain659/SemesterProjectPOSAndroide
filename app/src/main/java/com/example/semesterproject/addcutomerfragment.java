@@ -77,13 +77,12 @@ public class addcutomerfragment extends Fragment {
         String sql = "INSERT INTO customer(cust_name,cust_phone) VALUES (?, ?)";
         Object[] bindArgs = {customerName, customerPhone};
         try {
-            db.execSQL(sql);
+            db.execSQL(sql, bindArgs);
             Toast.makeText(getActivity(), "Customer added successfully", Toast.LENGTH_SHORT).show();
 
         } catch (SQLException e) {
             Toast.makeText(getActivity(), "Error inserting customer: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         } finally {
-
 
             db.close();
         }

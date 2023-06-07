@@ -44,53 +44,60 @@ import java.util.List;
  */
 public class updatecustomerFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
     private Spinner spinner;
     private posdatabasehelper dbhelper;
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
     public String id;
-    Button search;
+    Button search, update;
 
-
-    private Spinner spinnersearch;
     private EditText editTextName, editTextContact;
-    private Button searchButton;
 
     private SQLiteDatabase db;
+    ArrayList<String> customerNames, customerPhoneNumbers;
+    ArrayList<Integer> customerIDs;
+
     public updatecustomerFragment() {
         // Required empty public constructor
     }
+    private void searchCustomer() {
+        //declaring arraylists
+        customerIDs = new ArrayList<>();
+        customerNames = new ArrayList<>();
+        customerPhoneNumbers = new ArrayList<>();
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment updatecustomerFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static updatecustomerFragment newInstance(String param1, String param2) {
-        updatecustomerFragment fragment = new updatecustomerFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+
+        customerIDs.add(null);
+        customerNames.add("Customer Name");
+        customerPhoneNumbers.add("Contact Number");
+        String selectedCustomerId = (String) spinner.getSelectedItem();
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        Cursor customer_detail = db.rawQuery("SELECT cust_id, cust_name, cust_phone FROM customer WHERE cust_id = ?", new String[]{selectedCustomerId});
+        if (customer_detail.moveToFirst()) {
+
+            customerIDs.add(customer_detail.getInt(0));
+            customerNames.add(customer_detail.getString(1));
+            customerPhoneNumbers.add(customer_detail.getString(2));
+        }
+
     }
+    private void updatecustomer() {
+    String updated_name =editTextName.getText().toString();
+    String updated_contact = editTextContact.getText().toString();
+        String selectedCustomerId = (String) spinner.getSelectedItem();
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        db.execSQL("UPDATE customer SET cust_name = '" + updated_name + "', cust_phone = '" + updated_contact + "' WHERE cust_id = " + id);
+        Toast.makeText(this.getActivity(), "Updated Successfully", Toast.LENGTH_SHORT).show();
+editTextName.setText("");
+editTextContact.setText("");
+    }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -102,16 +109,27 @@ public class updatecustomerFragment extends Fragment {
          search = view.findViewById(R.id.SearchCustomerButtonInUpdateCustFragment);
         editTextName  = view.findViewById(R.id.CustomerNameInUpdateFragment);
         editTextContact = view.findViewById(R.id.ContactNumberInUpdateFragment);
+        update = view.findViewById(R.id.UPDATECUSTOMER);
         List<String> customerIds = fetchDataFromDatabase();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_item, customerIds);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     id = (String) spinner.getSelectedItem();
+        Toast.makeText(this.getActivity(), id, Toast.LENGTH_SHORT).show();
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 searchCustomer();
+              //   edtTextIDsearched.setText(customerIDs.get(1));
+editTextName.setText(customerNames.get(1));
+editTextContact.setText(customerPhoneNumbers.get(1));
 
+            }
+        });
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+updatecustomer();
             }
         });
 
@@ -136,19 +154,5 @@ public class updatecustomerFragment extends Fragment {
         return customerIds;
     }
 
-    private void searchCustomer() {
-        String selectedCustomerId = (String) spinner.getSelectedItem();
-        SQLiteDatabase db = dbhelper.getReadableDatabase();
-        Cursor cursorr = db.rawQuery("SELECT cust_name, cust_phone FROM customer WHERE cust_id = ?", new String[]{selectedCustomerId});
-        if (cursorr.moveToFirst()) {
-            String customerName = cursorr.getString(cursorr.getColumnIndexOrThrow("cust_name"));
-            String customerContact = cursorr.getString(cursorr.getColumnIndexOrThrow("cust_phone"));
-            // Populate the EditText fields with the retrieved customer data
-            editTextName.setText(customerName);
-            editTextContact.setText(customerContact);
-            Toast.makeText(this.getActivity(), customerName.toString(), Toast.LENGTH_SHORT).show();
-        }
-        cursorr.close();
-        db.close();
-    }
+
  }

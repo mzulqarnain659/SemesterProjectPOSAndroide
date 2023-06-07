@@ -71,34 +71,7 @@
                     android:text="Search" />
             </RelativeLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="10dp"
-            >
-            <TextView
-                android:text = "Customer ID"
-                android:layout_width="wrap_content"
-                android:layout_height = "30dp"
 
-                android:textSize = "20dp"
-                android:layout_alignParentTop = "true"
-                android:textAlignment="center"
-                android:layout_centerHorizontal = "true" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:id="@+id/CustomerIdInSearchResult"
-                android:layout_marginLeft="10dp"
-
-                android:inputType="none"
-                android:editable="false"
-                >
-
-            </EditText>
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -167,7 +140,7 @@
                 android:layout_height="wrap_content">
 
                 <Button
-                    android:id="@+id/AddInvoiceButton"
+                    android:id="@+id/UPDATECUSTOMER"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -176,13 +149,13 @@ android:padding="5dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="Add" />
+                    android:text="UPDATE" />
 
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="View"
+                    android:text="RESET"
                     android:id="@+id/ViewInvoiceButton"
                     android:layout_margin="16dp"
                     android:layout_alignParentRight="true"

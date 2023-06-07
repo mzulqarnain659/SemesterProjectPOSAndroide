@@ -19,6 +19,26 @@ public class posdatabasehelper extends SQLiteOpenHelper {
                 "    cust_name  TEXT," +
                 "    cust_phone TEXT" +
                 ");");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS invoice (" +
+                "    inv_id         INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "    cust_id        INTEGER," +
+                "    inv_date       TEXT," +
+                "    payment_status TEXT" +
+                ");");
+db.execSQL("CREATE TABLE IF NOT EXISTS supplier (" +
+        "    supplier_id      INTEGER PRIMARY KEY AUTOINCREMENT," +
+        "    supplier_name    TEXT," +
+        "    supplier_contact TEXT" +
+        ");");
+db.execSQL("CREATE TABLE IF NOT EXISTS inventory_item ( product_id INTEGER PRIMARY KEY," +
+        "        sup_id           INTEGER," +
+        "        date_of_addition TEXT," +
+        "        prod_name        TEXT," +
+        "        prod_make        TEXT," +
+        "        prod_quantity    INTEGER," +
+        "        prod_cost_price  INTEGER," +
+        "        prod_sale_price  INTEGER);");
         // Create tables or perform any other initialization tasks here
     }
 

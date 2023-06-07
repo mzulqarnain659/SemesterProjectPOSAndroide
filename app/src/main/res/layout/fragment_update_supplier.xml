@@ -42,7 +42,7 @@
                 android:layout_centerHorizontal = "true" />
 
             <Spinner
-                android:id="@+id/CustomerIdInUpdateFragmment"
+                android:id="@+id/SupplierIdInUpdateFragmment"
                 android:layout_width="165dp"
                 android:layout_height="45dp"
                 android:layout_marginLeft="10dp"
@@ -58,7 +58,7 @@
 
 
                 <Button
-                    android:id="@+id/SearchCustomerButtonInUpdateCustFragment"
+                    android:id="@+id/SearchSupplierButtonInUpdateSupplierFragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -68,34 +68,7 @@
                     android:text="Search" />
             </RelativeLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="10dp"
-            >
-            <TextView
-                android:text = "Supplier ID"
-                android:layout_width="wrap_content"
-                android:layout_height = "30dp"
 
-                android:textSize = "20dp"
-                android:layout_alignParentTop = "true"
-                android:textAlignment="center"
-                android:layout_centerHorizontal = "true" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:id="@+id/CustomerIdInSearchResult"
-                android:layout_marginLeft="10dp"
-
-                android:inputType="none"
-                android:editable="false"
-                >
-
-            </EditText>
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -115,7 +88,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:id="@+id/CustomerNameInUpdateFragment"
+                android:id="@+id/SupplierNameInUpdateFragment"
                 android:layout_marginLeft="10dp"
                 android:hint="Please enter customer name"
                 android:inputType="text"
@@ -134,7 +107,7 @@
                 android:text = "Contact Number"
                 android:layout_width="wrap_content"
                 android:layout_height = "30dp"
-                android:id = "@+id/cust_phone_label"
+                android:id = "@+id/SupplierPhoneInUpdateFragment"
                 android:textSize = "20dp"
                 android:layout_alignParentTop = "true"
                 android:textAlignment="center"
@@ -157,7 +130,7 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/LoginButton"
+                android:id="@+id/UPDATESPPLIER"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -165,7 +138,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="Add Update" />
+                android:text="Update" />
 
 
             <Button

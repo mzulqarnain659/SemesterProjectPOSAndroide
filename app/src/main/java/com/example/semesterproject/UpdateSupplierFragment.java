@@ -1,5 +1,7 @@
 package com.example.semesterproject;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,58 +9,125 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UpdateSupplierFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class UpdateSupplierFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    Button search, update;
+    String id;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Spinner spinner;
+    private posdatabasehelper dbhelper;
+    private EditText editTextName, editTextContact;
+
+    private SQLiteDatabase db;
+    ArrayList<String> supplierNames, supplierPhoneNumbers;
+    ArrayList<Integer> supplierIDs;
 
     public UpdateSupplierFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UpdateSupplierFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static UpdateSupplierFragment newInstance(String param1, String param2) {
-        UpdateSupplierFragment fragment = new UpdateSupplierFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    private void searchSupplier() {
+        //declaring arraylists
+        supplierIDs = new ArrayList<>();
+        supplierNames = new ArrayList<>();
+        supplierPhoneNumbers = new ArrayList<>();
+
+        //adding null values to iterate one more time before actually inflating the grid for
+        //header row
+        supplierIDs.add(null);
+        supplierNames.add("Supplier Name");
+        supplierPhoneNumbers.add("Contact Number");
+        String selectedsupplierId = (String) spinner.getSelectedItem();
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        Cursor customer_detail = db.rawQuery("SELECT supplier_id, supplier_name, supplier_contact FROM supplier WHERE supplier_id = ?", new String[]{selectedsupplierId});
+        if (customer_detail.moveToFirst()) {
+
+            supplierIDs.add(customer_detail.getInt(0));
+            supplierNames.add(customer_detail.getString(1));
+            supplierPhoneNumbers.add(customer_detail.getString(2));
+        }
+
+    }
+    private void updatesupplier() {
+        String updated_name =editTextName.getText().toString();
+        String updated_contact = editTextContact.getText().toString();
+        String selectedCustomerId = (String) spinner.getSelectedItem();
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        db.execSQL("UPDATE supplier SET supplier_name = '" + updated_name + "', supplier_contact = '" + updated_contact + "' WHERE supplier_id = " + id);
+        Toast.makeText(this.getActivity(), "Updated Successfully", Toast.LENGTH_SHORT).show();
+        editTextName.setText("");
+        editTextContact.setText("");
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_update_supplier, container, false);
+        View view=  inflater.inflate(R.layout.fragment_update_supplier, container, false);
+        dbhelper = new posdatabasehelper(this.getActivity());
+        spinner = view.findViewById(R.id.SupplierIdInUpdateFragmment);
+        search = view.findViewById(R.id.SearchSupplierButtonInUpdateSupplierFragment);
+        editTextName  = view.findViewById(R.id.SupplierNameInUpdateFragment);
+        editTextContact = view.findViewById(R.id.ContactNumberInUpdateFragment);
+        update = view.findViewById(R.id.UPDATESPPLIER);
+        List<String> supplierIds = fetchDataFromDatabase();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_item, supplierIds);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        id = (String) spinner.getSelectedItem();
+        Toast.makeText(this.getActivity(), id, Toast.LENGTH_SHORT).show();
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchSupplier();
+                //   edtTextIDsearched.setText(customerIDs.get(1));
+                editTextName.setText(supplierNames.get(1));
+                editTextContact.setText(supplierPhoneNumbers.get(1));
+
+            }
+        });
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updatesupplier();
+            }
+        });
+
+        return view;
     }
+    private List<String> fetchDataFromDatabase() {
+        List<String> supplierIds = new ArrayList<>();
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        // Query the database and retrieve customer IDs
+        Cursor cursor = db.rawQuery("SELECT supplier_id FROM supplier", null);
+        if (cursor.moveToFirst()) {
+            do {
+                String customerId = cursor.getString(cursor.getColumnIndex("supplier_id"));
+                supplierIds.add(customerId);
+            } while (cursor.moveToNext());
+        }
+
+        // Close the cursor and database
+        cursor.close();
+
+
+        return supplierIds;
+    }
+
+
 }

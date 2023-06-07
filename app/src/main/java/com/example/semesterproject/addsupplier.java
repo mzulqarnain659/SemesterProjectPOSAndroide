@@ -20,9 +20,9 @@ public class addsupplier  extends AppCompatActivity {
         setContentView(R.layout.addsupplier);
 
         Button add, update,view;
-add = findViewById(R.id.AddSupplierButton);
-update = findViewById(R.id.UpdateSupplierButton);
-view = findViewById(R.id.ViewSupplierButton);
+        add = findViewById(R.id.AddSupplierButton);
+        update = findViewById(R.id.UpdateSupplierButton);
+        view = findViewById(R.id.ViewSupplierButton);
         FrameLayout CustomerFrame = findViewById(R.id.SupplierFrame);
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction= manager.beginTransaction();

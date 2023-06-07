@@ -17,19 +17,19 @@
             android:layout_marginTop="30dp"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:text="Product ID"
-                android:textSize="16sp"
+                android:textSize="22sp"
                 >
             </TextView>
-            <EditText
-                android:id="@+id/Customer_IdSpinner"
+            <Spinner
+                android:id="@+id/ProdutIdInUpdateStockFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-            </EditText>
+            </Spinner>
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
 
 
                 <Button
-                    android:id="@+id/SearchCustomerButtonInUpdateCustFragment"
+                    android:id="@+id/SearchProductButtonInUpdateCustFragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -55,14 +55,14 @@
             android:layout_marginTop="30dp"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:text="Supplier ID"
-                android:textSize="16sp"
+                android:textSize="22sp"
                 >
             </TextView>
             <Spinner
-                android:id="@+id/InvoiceID"
+                android:id="@+id/SupplierIDInUpdateStockFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -78,14 +78,14 @@
             android:layout_marginTop="30dp"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:text="Name"
-                android:textSize="16sp"
+                android:textSize="22sp"
                 >
             </TextView>
             <EditText
-                android:id="@+id/CustonmerNameSpinner"
+                android:id="@+id/ProductNameInUpdateStock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -103,14 +103,14 @@
             android:layout_marginTop="30dp"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:text="Date"
-                android:textSize="16sp"
+                android:textSize="22sp"
                 >
             </TextView>
             <EditText
-                android:id="@+id/AdditionOfItemDate"
+                android:id="@+id/DateOfAdditioninStockInUpdateStock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -127,14 +127,14 @@
             android:layout_marginTop="30dp"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:text="Make"
-                android:textSize="16sp"
+                android:textSize="22sp"
                 >
             </TextView>
             <EditText
-                android:id="@+id/ProductMake"
+                android:id="@+id/ProductMakeinUpdateStockFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -149,17 +149,19 @@
             android:layout_marginTop="30dp"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:text="Quantity"
-                android:textSize="16sp"
+                android:textSize="22sp"
                 >
             </TextView>
             <EditText
-                android:id="@+id/ProductQuantity"
+                android:id="@+id/ProductQuantityInUpdateStockFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:inputType="number"
+                >
 
             </EditText>
 
@@ -171,17 +173,19 @@
             android:layout_marginTop="30dp"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:text="Cost Price"
-                android:textSize="16sp"
+                android:textSize="22sp"
                 >
             </TextView>
             <EditText
-                android:id="@+id/UnitPrice"
+                android:id="@+id/UnitPriceInUpdateStockFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:inputType="number"
+                >
 
             </EditText>
 
@@ -193,17 +197,19 @@
             android:layout_marginTop="30dp"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:text="Sale Price"
-                android:textSize="16sp"
+                android:textSize="22sp"
                 >
             </TextView>
             <EditText
-                android:id="@+id/TotalPrice"
+                android:id="@+id/SalesPriceInUpdateStockFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:inputType="number"
+                >
 
             </EditText>
 
@@ -220,7 +226,7 @@
                 android:layout_height="wrap_content">
 
                 <Button
-                    android:id="@+id/AdditemToInvoice"
+                    android:id="@+id/UpdateStock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"

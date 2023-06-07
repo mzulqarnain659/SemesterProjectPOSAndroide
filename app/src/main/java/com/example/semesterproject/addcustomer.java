@@ -27,33 +27,33 @@ int a;
         FragmentTransaction  transaction= manager.beginTransaction();
         transaction.replace(R.id.Customer_Frame, new addcutomerfragment());
         transaction.commit();
-add.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction  transaction= manager.beginTransaction();
-        transaction.replace(R.id.Customer_Frame, new addcutomerfragment());
-        transaction.commit();
-    }
-});
-update.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction  transaction= manager.beginTransaction();
-        transaction.replace(R.id.Customer_Frame, new updatecustomerFragment());
-        transaction.commit();
-    }
-});
-view.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction  transaction= manager.beginTransaction();
-        transaction.replace(R.id.Customer_Frame, new viewcustomerFragment());
-        transaction.commit();
-    }
-});
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager manager = getSupportFragmentManager();
+                FragmentTransaction  transaction= manager.beginTransaction();
+                transaction.replace(R.id.Customer_Frame, new addcutomerfragment());
+                transaction.commit();
+            }
+        });
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager manager = getSupportFragmentManager();
+                FragmentTransaction  transaction= manager.beginTransaction();
+                transaction.replace(R.id.Customer_Frame, new updatecustomerFragment());
+                transaction.commit();
+            }
+        });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager manager = getSupportFragmentManager();
+                FragmentTransaction  transaction= manager.beginTransaction();
+                transaction.replace(R.id.Customer_Frame, new viewcustomerFragment());
+                transaction.commit();
+            }
+        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

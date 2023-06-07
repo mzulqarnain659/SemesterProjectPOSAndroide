@@ -1,12 +1,18 @@
 package com.example.semesterproject;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,50 +21,82 @@ import android.view.ViewGroup;
  */
 public class ViewStockFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+TableLayout tableLayout;
+posdatabasehelper dbhelper;
+SQLiteDatabase db;
 
     public ViewStockFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ViewStockFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ViewStockFragment newInstance(String param1, String param2) {
-        ViewStockFragment fragment = new ViewStockFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_view_stock, container, false);
+        View view = inflater.inflate(R.layout.fragment_view_stock, container, false);
+        tableLayout = view.findViewById(R.id.tableLayoutstock);
+        dbhelper = new posdatabasehelper(this.getActivity());
+        db = dbhelper.getReadableDatabase();
+        fetchSupplierData();
+        return view;
+    }
+    private void fetchSupplierData() {
+        Cursor cursor = db.rawQuery("SELECT supplier_id, supplier_name, supplier_contact FROM supplier", null);
+        TableRow headerRow = new TableRow(this.getActivity());
+
+        TextView headerId = createHeaderTextView("ID");
+        TextView headerName = createHeaderTextView("Name");
+        TextView headerContact = createHeaderTextView("Contact");
+
+        headerRow.addView(headerId);
+        headerRow.addView(headerName);
+        headerRow.addView(headerContact);
+
+        tableLayout.addView(headerRow);
+        if (cursor.moveToFirst()) {
+            do {
+                String supplierId = cursor.getString(cursor.getColumnIndex("supplier_id"));
+                String supplierName = cursor.getString(1);
+                String supplierPhone = cursor.getString(2);
+
+                TableRow tableRow = new TableRow(this.getActivity());
+
+
+
+                TextView textViewId = createTextView(supplierId);
+                TextView textViewName = createTextView(supplierName);
+                TextView textViewPhone = createTextView(supplierPhone);
+
+                tableRow.addView(textViewId);
+                tableRow.addView(textViewName);
+                tableRow.addView(textViewPhone);
+
+                tableLayout.addView(tableRow);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+    }
+
+    private TextView createTextView(String text) {
+        TextView textView = new TextView(this.getActivity());
+        textView.setText(text);
+        textView.setGravity(Gravity.CENTER);
+        textView.setPadding(10, 10, 10, 10);
+        return textView;
+    }
+    private TextView createHeaderTextView(String text) {
+        TextView textView = createTextView(text);
+        textView.setAllCaps(true);
+        textView.setGravity(Gravity.CENTER);
+        return textView;
     }
 }

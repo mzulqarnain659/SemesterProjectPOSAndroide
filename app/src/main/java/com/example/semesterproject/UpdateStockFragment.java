@@ -1,5 +1,7 @@
 package com.example.semesterproject;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,58 +9,150 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UpdateStockFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class UpdateStockFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    public  posdatabasehelper dbhelper;
+    public SQLiteDatabase db;
+    Spinner pid,sid;
+    String proid, supid;
+    EditText product_name,date_of_addition_in_stock,prod_make,quantity,cost_price, sales_price;
+Button Update;
+Button search;
+String DateOfAddition,ProdName,ProdMake;
+String ProdQuantity,ProdCP,ProdSP,Prod_id,Sup_id;
 
     public UpdateStockFragment() {
         // Required empty public constructor
     }
+    private void fetchDataFromDatabase(){
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UpdateStockFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static UpdateStockFragment newInstance(String param1, String param2) {
-        UpdateStockFragment fragment = new UpdateStockFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+
+
+        db = dbhelper.getReadableDatabase();
+        String SelectedProductId = (String) pid.getSelectedItem();
+        String SelectedSupplierId = (String) sid.getSelectedItem();
+        String Sql = " SELECT * FROM inventory_item where product_id =? AND sup_id = ? ";
+        Cursor stockDetail=  db.rawQuery(Sql, new String[]{SelectedProductId,SelectedSupplierId});
+        if (stockDetail.moveToNext()){
+
+            DateOfAddition = stockDetail.getString(2);
+            ProdName = stockDetail.getString(3);
+            ProdMake = stockDetail.getString(4);
+            ProdQuantity = stockDetail.getString(5);
+            ProdCP = stockDetail.getString(6);
+            ProdSP = stockDetail.getString(7);
+         }
+
+
     }
+ public void updateStock(){
+db = dbhelper.getReadableDatabase();
+     db.execSQL("UPDATE customer SET prod_name = '" + product_name.getText() + "', prod_make = '" + prod_make.getText() + "' prod_quantity = '"+ quantity.getText() +"' prod_cost_price = '"+ cost_price.getText() +"' prod_sale_price = '"+ sales_price.getText() + "' WHERE product_id = '"+ proid +"' AND sup_id = '"+supid +"' " );
+     Toast.makeText(this.getActivity(), "Updated Successfully", Toast.LENGTH_SHORT).show();
+
+ }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
+    }
+  public  List<String>  fetchSupplierIDFromDatabase(){
+      List<String> supplierIds = new ArrayList<>();
+       SQLiteDatabase db = dbhelper.getReadableDatabase();
+      // Query the database and retrieve customer IDs
+      Cursor cursor = db.rawQuery("SELECT sup_id FROM inventory_item", null);
+      if (cursor.moveToFirst()) {
+          do {
+              String customerId = cursor.getString(cursor.getColumnIndex("sup_id"));
+              supplierIds.add(customerId);
+          } while (cursor.moveToNext());
+      }
+
+      // Close the cursor and database
+      cursor.close();
+
+
+      return supplierIds;
+
+  }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_update_stock, container, false);
+        View view= inflater.inflate(R.layout.fragment_update_stock, container, false);
+        dbhelper = new posdatabasehelper(this.getActivity());
+    pid = view.findViewById(R.id.ProdutIdInUpdateStockFragment);
+    sid= view.findViewById(R.id.SupplierIDInUpdateStockFragment);
+    product_name =view.findViewById(R.id.ProductNameInUpdateStock);
+    date_of_addition_in_stock = view.findViewById(R.id.DateOfAdditioninStockInUpdateStock);
+    prod_make = view.findViewById(R.id.ProductMakeinUpdateStockFragment);
+    quantity = view.findViewById(R.id.ProductQuantityInUpdateStockFragment);
+    cost_price = view.findViewById(R.id.UnitPriceInUpdateStockFragment);
+    sales_price = view.findViewById(R.id.SalesPriceInUpdateStockFragment);
+Update = view.findViewById(R.id.UpdateStock);
+search = view.findViewById(R.id.SearchProductButtonInUpdateCustFragment);
+        List<String> ProductIds = fetchproductIdFromDatabase();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, ProductIds);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        pid.setAdapter(adapter);
+        List<String> supplierIds = fetchSupplierIDFromDatabase();
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, supplierIds);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sid.setAdapter(adapter1);
+        proid = (String) pid.getSelectedItem();
+        supid =(String) sid.getSelectedItem();
+        Update.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        updateStock();
     }
+});
+        search.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        fetchDataFromDatabase();
+        date_of_addition_in_stock.setText(DateOfAddition);
+        product_name.setText(ProdName);
+        prod_make.setText(ProdMake);
+        quantity.setText(ProdQuantity);
+        cost_price.setText(ProdCP);
+        sales_price.setText(ProdSP);
+
+    }
+});
+ return view;
+    }
+    private List<String> fetchproductIdFromDatabase() {
+        List<String> ProductIds = new ArrayList<>();
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        // Query the database and retrieve customer IDs
+        Cursor cursor = db.rawQuery("SELECT product_id FROM inventory_item", null);
+        if (cursor.moveToFirst()) {
+            do {
+                String customerId = cursor.getString(cursor.getColumnIndex("product_id"));
+                ProductIds.add(customerId);
+            } while (cursor.moveToNext());
+        }
+
+        // Close the cursor and database
+        cursor.close();
+
+
+        return ProductIds;
+    }
+
 }
