@@ -9,7 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridView;
-        import android.widget.Toast;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,16 +20,20 @@ import androidx.fragment.app.FragmentTransaction;
 public class home extends AppCompatActivity {
 
     GridView androidGridView;
-
+TextView user;
     Button b1,b2;
+    String username;
 ToggleButton b3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+username = getIntent().getStringExtra("user");
 
         b3= findViewById(R.id.change_home_view);
-
+user = findViewById(R.id.textViewusername);
+user.setText(username);
+        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
         fragmentTransaction.replace(R.id.homeFragment, new homegridview());
@@ -58,10 +63,12 @@ ToggleButton b3;
 }
 
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_logout, menu);
         return true;
     }
 
@@ -91,6 +98,10 @@ ToggleButton b3;
         {
             Intent it= new Intent(home.this, report.class);
             startActivity(it);
+        }else if (id == R.id.action_logout){
+            Intent it= new Intent(home.this, MainActivity.class);
+            startActivity(it);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

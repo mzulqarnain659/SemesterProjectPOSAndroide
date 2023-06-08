@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
      Button b1,b2 ;
 
     private FirebaseAuth mAuth;
-
+   public EditText email,password;
+    public  String EnteredEmail,EnteredPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,23 +40,22 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-//        EditText email = findViewById(R.id.username);  // Replace with user's entered email
-//        EditText password =   findViewById(R.id.password); // Replace with user's entered password
-//        String EnteredEmail = email.getText().toString().trim();
-//        String EnteredPassword = password.getText().toString().trim();
-//
-//        if (EnteredEmail.length()<=0 || EnteredPassword.length()<=0){
-//            Toast.makeText(MainActivity.this, "Please enter Valid Credentials",
-//                    Toast.LENGTH_SHORT).show();
-//        }
-//        else {
-//            Toast.makeText(MainActivity.this, EnteredEmail+""+EnteredPassword,
-//                    Toast.LENGTH_SHORT).show();
-//            signInWithEmailAndPassword(EnteredEmail, EnteredPassword);
-//        }
-//
-        Intent switchNow = new Intent(MainActivity.this,home.class);
-        startActivity(switchNow);
+        email = findViewById(R.id.username);  // Replace with user's entered email
+          password =   findViewById(R.id.password); // Replace with user's entered password
+          EnteredEmail = email.getText().toString().trim();
+          EnteredPassword = password.getText().toString().trim();
+
+        if (EnteredEmail.length()<=0 || EnteredPassword.length()<=0){
+            Toast.makeText(MainActivity.this, "Please enter Valid Credentials",
+                    Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(MainActivity.this, EnteredEmail+""+EnteredPassword,
+                    Toast.LENGTH_SHORT).show();
+            signInWithEmailAndPassword(EnteredEmail, EnteredPassword);
+        }
+
+
     }
 });
 b2.setOnClickListener(new View.OnClickListener() {
@@ -67,23 +67,25 @@ b2.setOnClickListener(new View.OnClickListener() {
 });
     }
 
-//    private void signInWithEmailAndPassword(String email, String password) {
-//        mAuth.signInWithEmailAndPassword(email, password)
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            // Authentication success
-//                            FirebaseUser user = mAuth.getCurrentUser();
-//                            Intent switchNow = new Intent(MainActivity.this,home.class);
-//                            startActivity(switchNow);
-//
-//                        } else {
-//                            // Authentication failed
-//                            Toast.makeText(MainActivity.this, "Authentication failed.",
-//                                    Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//    }
+    private void signInWithEmailAndPassword(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Authentication success
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Intent switchNow = new Intent(MainActivity.this,home.class);
+                            switchNow.putExtra("user",EnteredEmail);
+                            startActivity(switchNow);
+                            finish();
+
+                        } else {
+                            // Authentication failed
+                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
 }
