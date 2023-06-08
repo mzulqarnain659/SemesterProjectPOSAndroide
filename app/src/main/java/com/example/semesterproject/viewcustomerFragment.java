@@ -18,12 +18,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.PopupMenu;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.semesterproject.Adapters.customerGridViewAdapter;
+import com.example.semesterproject.Adapters.stockGridViewAdapter;
 
 import java.util.ArrayList;
 
@@ -34,8 +33,7 @@ import java.util.ArrayList;
 
 public class viewcustomerFragment extends Fragment {
 
-    private TableLayout tableLayout;
-    GridView customerGrid;
+     GridView customerGrid;
     posdatabasehelper databaseHelper;
     SQLiteDatabase db;
     View selectedRow;

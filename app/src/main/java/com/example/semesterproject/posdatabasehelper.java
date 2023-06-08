@@ -39,7 +39,20 @@ db.execSQL("CREATE TABLE IF NOT EXISTS inventory_item ( product_id INTEGER PRIMA
         "        prod_quantity    INTEGER," +
         "        prod_cost_price  INTEGER," +
         "        prod_sale_price  INTEGER);");
-        // Create tables or perform any other initialization tasks here
+      db.execSQL("CREATE TABLE IF NOT EXISTS invoice_item (" +
+              "    prod_id          INTEGER," +
+              "    cust_id          INTEGER," +
+              "    inv_id           INTEGER," +
+              "    date_of_addition TEXT," +
+              "    itm_name         TEXT," +
+              "    itm_make         TEXT," +
+              "    itm_quantity     INTEGER," +
+              "    itm_price        INTEGER," +
+              "    itm_total_price  INTEGER," +
+              "    sub_total        INTEGER" +
+              ");");
+
+
     }
 
     @Override

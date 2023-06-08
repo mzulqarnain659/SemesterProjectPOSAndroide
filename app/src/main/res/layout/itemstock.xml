@@ -1,0 +1,111 @@
+<!-- item_customer.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="8"
+        android:columnOrderPreserved="true"
+
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_rowWeight="1"
+            android:id="@+id/textViewProductId"
+            android:background="@drawable/cell_borders"
+            android:padding="5dp"
+
+            android:layout_columnSpan="1"
+            android:layout_columnWeight="1"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_rowWeight="1"
+            android:id="@+id/textViewSupplerID"
+            android:background="@drawable/cell_borders"
+            android:padding="5dp"
+
+            android:layout_columnSpan="1"
+            android:layout_columnWeight="1"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_rowWeight="1"
+            android:id="@+id/textViewProductName"
+            android:background="@drawable/cell_borders"
+            android:padding="5dp"
+
+            android:layout_columnSpan="1"
+            android:layout_columnWeight="1"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_rowWeight="1"
+            android:id="@+id/textViewDate"
+            android:background="@drawable/cell_borders"
+            android:padding="5dp"
+
+            android:layout_columnSpan="1"
+            android:layout_columnWeight="1"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_rowWeight="1"
+            android:id="@+id/textViewMake"
+            android:background="@drawable/cell_borders"
+            android:padding="5dp"
+
+            android:layout_columnSpan="1"
+            android:layout_columnWeight="1"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_rowWeight="1"
+            android:id="@+id/textViewQuantity"
+            android:background="@drawable/cell_borders"
+            android:padding="5dp"
+
+            android:layout_columnSpan="1"
+            android:layout_columnWeight="1"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_rowWeight="1"
+            android:id="@+id/textViewCostPrice"
+            android:background="@drawable/cell_borders"
+            android:padding="5dp"
+
+            android:layout_columnSpan="1"
+            android:layout_columnWeight="1"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_rowWeight="1"
+            android:id="@+id/textViewSalePrice"
+            android:background="@drawable/cell_borders"
+            android:padding="5dp"
+
+            android:layout_columnSpan="1"
+            android:layout_columnWeight="1"
+            />
+    </GridLayout>
+
+</LinearLayout>

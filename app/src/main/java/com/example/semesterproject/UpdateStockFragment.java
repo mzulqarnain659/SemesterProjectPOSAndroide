@@ -25,6 +25,8 @@ public class UpdateStockFragment extends Fragment {
 
     public  posdatabasehelper dbhelper;
     public SQLiteDatabase db;
+   public String SelectedProductId ;
+   public String SelectedSupplierId ;
     Spinner pid,sid;
     String proid, supid;
     EditText product_name,date_of_addition_in_stock,prod_make,quantity,cost_price, sales_price;
@@ -41,8 +43,7 @@ String ProdQuantity,ProdCP,ProdSP,Prod_id,Sup_id;
 
 
         db = dbhelper.getReadableDatabase();
-        String SelectedProductId = (String) pid.getSelectedItem();
-        String SelectedSupplierId = (String) sid.getSelectedItem();
+
         String Sql = " SELECT * FROM inventory_item where product_id =? AND sup_id = ? ";
         Cursor stockDetail=  db.rawQuery(Sql, new String[]{SelectedProductId,SelectedSupplierId});
         if (stockDetail.moveToNext()){
@@ -58,8 +59,8 @@ String ProdQuantity,ProdCP,ProdSP,Prod_id,Sup_id;
 
     }
  public void updateStock(){
-db = dbhelper.getReadableDatabase();
-     db.execSQL("UPDATE customer SET prod_name = '" + product_name.getText() + "', prod_make = '" + prod_make.getText() + "' prod_quantity = '"+ quantity.getText() +"' prod_cost_price = '"+ cost_price.getText() +"' prod_sale_price = '"+ sales_price.getText() + "' WHERE product_id = '"+ proid +"' AND sup_id = '"+supid +"' " );
+db = dbhelper.getWritableDatabase();
+     db.execSQL("UPDATE inventory_item SET prod_name = '" + product_name.getText() + "', prod_make = '" + prod_make.getText() + "', prod_quantity = '"+ quantity.getText() +"' , prod_cost_price = '"+ cost_price.getText() +"', prod_sale_price = '"+ sales_price.getText() + "', date_of_addition='"+date_of_addition_in_stock.getText()+"' WHERE product_id = '"+ SelectedProductId +"' AND sup_id = '"+ SelectedSupplierId +"' " );
      Toast.makeText(this.getActivity(), "Updated Successfully", Toast.LENGTH_SHORT).show();
 
  }
@@ -108,13 +109,39 @@ search = view.findViewById(R.id.SearchProductButtonInUpdateCustFragment);
         List<String> ProductIds = fetchproductIdFromDatabase();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, ProductIds);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        pid.setAdapter(adapter);
+pid.setAdapter(adapter);
         List<String> supplierIds = fetchSupplierIDFromDatabase();
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, supplierIds);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sid.setAdapter(adapter1);
-        proid = (String) pid.getSelectedItem();
-        supid =(String) sid.getSelectedItem();
+        pid.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+SelectedProductId = (String) pid.getSelectedItem();
+                Toast.makeText(getActivity(), SelectedProductId, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        sid.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+               SelectedSupplierId = (String) sid.getSelectedItem();
+                Toast.makeText(getActivity(), SelectedSupplierId, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        sid.setSelected(false);
+        //proid = (String) pid.getSelectedItem();
+       // supid =(String) sid.getSelectedItem()
         Update.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
