@@ -16,7 +16,7 @@ ListView homelistview;
 
     public listviewhome() {
 
-        // Required empty public constructor
+
     }
     String[] productName ={"Customer","Invoice","Supplier","Stock", "Report"};
     int[] productImages = { R.drawable.customer ,R.drawable.invoice ,R.drawable.supplier ,R.drawable.stock,R.drawable.report };

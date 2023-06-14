@@ -22,15 +22,10 @@ public class homegridview extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_homegridview, container, false);
         homeGridView = view.findViewById(R.id.home_gridview);
-
-
         GridViewInflator gridViewInflator = new GridViewInflator(this.getContext(),productImages, productName, R.layout.homelayoutsamplegridview);
-
         homeGridView.setAdapter(gridViewInflator);
-
         homeGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -53,7 +48,6 @@ public class homegridview extends Fragment {
 
             }
         });
-                // Inflate the layout for this fragment
-        return view;
+         return view;
     }
 }

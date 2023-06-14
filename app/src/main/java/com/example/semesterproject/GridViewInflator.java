@@ -17,11 +17,12 @@ public class GridViewInflator extends ArrayAdapter<String> {
     private int viewID;
     GridViewInflator(Context context, int[] imageResource, String[] productName, int viewID)
     {
-        super(context, viewID, productName);
 
+        super(context, viewID, productName);
         this.viewID = viewID;
         this.imageResource = imageResource;
         this.productName = productName;
+
     }
 
 

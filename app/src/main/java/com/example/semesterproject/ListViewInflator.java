@@ -31,7 +31,7 @@ public class ListViewInflator extends ArrayAdapter<String> {
 
 
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        gridView = inflater.inflate( viewID, parent, false );
+        gridView = inflater.inflate( viewID, parent,false );
 
 
         ImageView productImage = gridView.findViewById(R.id.list_imageview);
